@@ -1,13 +1,15 @@
-const express = require('express');
-const recipes_routes = express.Router(); // miniMain isolated route
-const route = "/recipes";
+"use strict";
 
-recipes_routes.get(route, (req, res) => {
+const express = require("express");
+const recipes_routes = express.Router(); // miniMain isolated route
+const sub_route = "/";
+
+recipes_routes.get(sub_route, (req, res) => {
   res.status(200)
   .send("GET recipes");
 });
 
-recipes_routes.delete(route, (req, res) => {
+recipes_routes.delete(sub_route, (req, res) => {
   res.status(200)
   .send("DELETE recipes");
 });
