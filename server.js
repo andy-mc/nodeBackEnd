@@ -1,13 +1,13 @@
 const express = require('express');
-const router = express.Router();
 const favicon = require('serve-favicon')
 const path = require('path')
 
 const PORT = process.env.PORT || 3000;
-const app = express();
+const app = express(); // Main app routes
+const router = express.Router(); // miniMain isolated app routes
 
-app.use(router)
 app.use(favicon(path.join(__dirname, 'public', 'pikachu.ico')))
+app.use(router);
 
 router.get("/", (req, res) => {
   res.status(200)
@@ -24,9 +24,9 @@ router.post("/home", (req, res) => {
   .send("POST Home");
 });
 
-app.use((req, res) => {
+router.use((req, res) => {
   res.status(404)
-  .send("<h1>404 page not found on Server :( !!</h1>")
+  .send("<h1>404 page not found on Server !!</h1>")
 })
 
 app.listen(PORT, () => {
