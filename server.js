@@ -1,7 +1,6 @@
 "use strict";
 
 const express = require("express");
-const bodyParser = require("body-parser");
 const favicon = require("serve-favicon");
 const path = require("path");
 
@@ -14,9 +13,9 @@ const app = express(); // Main app routes
 app.use(favicon(path.join(__dirname, "public", "pikachu.ico")));
 
 // parse 'content-type': 'application/json'
-app.use(bodyParser.json());
+app.use(express.json());
 // parse 'content-type': 'application/x-www-form-urlencoded'
-app.use(bodyParser.urlencoded());
+app.use(express.urlencoded());
 
 app.get("/", (req, res) => {
   res.status(200)
