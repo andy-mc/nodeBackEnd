@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const favicon = require('serve-favicon')
 const path = require('path')
 
@@ -7,6 +8,7 @@ const app = express(); // Main app routes
 const router = express.Router(); // miniMain isolated app routes
 
 app.use(favicon(path.join(__dirname, 'public', 'pikachu.ico')))
+app.use(bodyParser);
 app.use(router);
 
 router.get("/", (req, res) => {
