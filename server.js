@@ -25,6 +25,11 @@ app.get("/", (req, res) => {
 app.all("/message", (req, res) => {
   const body = req.body;
 
+  res.header({
+    "x-message": "my message",
+    "x-message-content": "my message content"
+  });
+
   res.status(200)
   .send(`
   <h1>All methods message route</h1>
