@@ -13,7 +13,9 @@ const {route_404} = require("./modules/route_404");
 const PORT = process.env.PORT || 3000;
 const app = express();
 
+app.use("/", express.static(path.join(__dirname, "../client/build")));
 app.use(favicon(path.join(__dirname, "public", "pikachu.ico")));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
