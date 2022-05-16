@@ -2,6 +2,7 @@
 
 const express = require("express");
 const home_routes = express.Router(); // miniMain isolated route
+const response = require("../../network/response");
 const sub_route = "";
 
 home_routes.use((req, res, next) => {
@@ -10,13 +11,11 @@ home_routes.use((req, res, next) => {
 });
 
 home_routes.get(sub_route, (req, res) => {
-  res.status(200)
-  .send("GET Home");
+  response.success(req, res, "GET Home", 200);
 });
 
 home_routes.post(sub_route, (req, res) => {
-  res.status(200)
-  .send("POST Home");
+  response.success(req, res, "POST Home", 200);
 });
 
 module.exports = {home_routes};

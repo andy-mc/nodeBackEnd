@@ -1,17 +1,16 @@
 "use strict";
 
 const express = require("express");
-const recipes_routes = express.Router(); // miniMain isolated route
+const recipes_routes = express.Router();
+const response = require("../../network/response");
 const sub_route = "/";
 
 recipes_routes.get(sub_route, (req, res) => {
-  res.status(200)
-  .send("GET recipes");
+  response.success(req, res, "GET Recipes", 200);
 });
 
 recipes_routes.delete(sub_route, (req, res) => {
-  res.status(200)
-  .send("DELETE recipes");
+  response.success(req, res, "DELETE Recipes", 200);
 });
 
 module.exports = {recipes_routes};
