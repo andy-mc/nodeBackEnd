@@ -16,7 +16,13 @@ const error = (req, res, error={}, status=404) => {
   });
 };
 
+const html = (req, res, html, status=200) => { 
+  res.status(status)
+  .send(html);
+};
+
 module.exports = {
   success,
-  error
+  error,
+  html
 };

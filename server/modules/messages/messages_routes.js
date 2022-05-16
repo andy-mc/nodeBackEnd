@@ -27,4 +27,4 @@ messages_routes.all(sub_route, (req, res) => {
 
 });
 
-module.exports = {messages_routes};
+module.exports = messages_routes;

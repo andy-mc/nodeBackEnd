@@ -18,4 +18,7 @@ home_routes.post(sub_route, (req, res) => {
   response.success(req, res, "POST Home", 200);
 });
 
-module.exports = {home_routes};
+// I have fear that exporting directly and
+// not as an object make testing difficult or impossible
+// module.exports = {home_routes};
+module.exports = home_routes;

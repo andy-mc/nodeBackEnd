@@ -1,37 +1,30 @@
 "use strict";
 
 const express = require("express");
-const favicon = require("serve-favicon");
-const response = require("./network/response");
 const path = require("path");
-
-const {home_routes} = require("./modules/home/home_routes.js");
-const {recipes_routes} = require("./modules/recipes/recipes_routes.js");
-const {messages_routes} = require("./modules/messages/messages_routes.js");
-const {route_404} = require("./modules/route_404");
 
 const PORT = process.env.PORT || 3000;
 const app = express();
 
+// Serve client static files
 app.use("/", express.static(path.join(__dirname, "../client/build")));
-app.use(favicon(path.join(__dirname, "public", "pikachu.ico")));
 
+// Parse request body
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.get("/", (req, res) => {
-  response.success(req, res, "Root", 200);
-});
-
-app.use("/home", home_routes);
-app.use("/recipes", recipes_routes);
-app.use("/messages", messages_routes);
-app.use("*", route_404);
+// Routes
+app.use("/home", require("./modules/home/home_routes"));
+app.use("/recipes", require("./modules/recipes/recipes_routes"));
+app.use("/messages", require("./modules/messages/messages_routes"));
+// All not found routes use not_found_route
+app.use("*", require("./network/not_found_route"));
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
+// Error handling
 process.on("uncaughtException", (errors) => {
   console.error("uncaughtException");
   console.error(errors);

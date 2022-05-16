@@ -13,4 +13,4 @@ recipes_routes.delete(sub_route, (req, res) => {
   response.success(req, res, "DELETE Recipes", 200);
 });
 
-module.exports = {recipes_routes};
+module.exports = recipes_routes;
