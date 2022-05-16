@@ -11,13 +11,10 @@ const {messages_routes} = require("./modules/messages/messages_routes.js");
 const {route_404} = require("./modules/route_404");
 
 const PORT = process.env.PORT || 3000;
-const app = express(); // Main app routes
+const app = express();
 
 app.use(favicon(path.join(__dirname, "public", "pikachu.ico")));
-
-// parse 'content-type': 'application/json'
 app.use(express.json());
-// parse 'content-type': 'application/x-www-form-urlencoded'
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
