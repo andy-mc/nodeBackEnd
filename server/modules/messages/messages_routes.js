@@ -9,7 +9,13 @@ messages_routes.all(sub_route, (req, res) => {
   const body = req.body;
 
   if (req.query.error) {
-    response.error(req, res, {message: req.query.error}, 400);
+    response.error(
+      req, 
+      res, 
+      {message: req.query.error}, 
+      400, 
+      `log message: error from req.query.error ${req.query.error}`
+    );
   } else {
     res.header({
       "x-message": "my message",

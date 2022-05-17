@@ -8,7 +8,9 @@ const success = (req, res, data={}, status=200) => {
   });
 };
 
-const error = (req, res, error={}, status=404) => { 
+const error = (req, res, error={}, status=404, error_details) => { 
+  console.error("[LOG_ERROR_DETAILS]:", error_details);
+
   res.status(status)
   .send({
     error,
