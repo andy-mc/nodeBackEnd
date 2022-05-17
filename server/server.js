@@ -1,6 +1,7 @@
 "use strict";
 
 const express = require("express");
+const load_routes = require("./network/load_routes");
 const compression = require("compression");
 const path = require("path");
 
@@ -11,9 +12,9 @@ const app = express();
 app.use(compression());
 
 // Serve client static files
-var options = {
+const options = {
   fallthrough: true, 
-  setHeaders: function (res, path, stat) {
+  setHeaders: (res) => {
     res.set("x-timestamp", Date.now());
   }
 };
@@ -29,11 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Routes
-app.use(require("./components/home/home_routes"));
-app.use(require("./components/recipes/recipes_routes"));
-app.use(require("./components/messages/messages_routes"));
-// All not found routes use not_found_route middleware
-app.use(require("./network/not_found_route"));
+load_routes(app);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

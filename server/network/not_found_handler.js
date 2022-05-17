@@ -2,7 +2,7 @@
 
 const response = require("./response");
 
-const not_found_route = (req, res) => {
+const not_found_handler = (req, res) => {
   // this makes express respnose an html page
   // I'm wondering if this is the best way to do this
   // how I can make this using react to handle missing routes
@@ -12,4 +12,4 @@ const not_found_route = (req, res) => {
   response.html(req, res, "<h3>404 page not found on Server :D !!</h3>");
 };
 
-module.exports = not_found_route;
+module.exports = not_found_handler;
