@@ -10,7 +10,10 @@ const home_middleware = ((req, res, next) => {
   next();
 });
 
-home_routes.get(sub_route, home_middleware, (req, res) => {
+// which is the difference between home_routes.use and home_routes.all ?
+home_routes.all(sub_route, home_middleware);
+
+home_routes.get(sub_route, (req, res) => {
   response.success(req, res, "GET Home", 200);
 });
 

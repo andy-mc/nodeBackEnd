@@ -12,11 +12,12 @@ app.use(compression());
 
 // Serve client static files
 var options = {
-  fallthrough: true, // When this option is true, client errors such as a bad request or a request to a non-existent file will cause this middleware to simply call next() to invoke the next middleware in the stack. When false, these errors (even 404s), will invoke next(err).
+  fallthrough: true, 
   setHeaders: function (res, path, stat) {
     res.set("x-timestamp", Date.now());
   }
 };
+
 // Use express.static to serve the client folder
 app.use("/", express.static(
   path.join(__dirname, "../client/build"),
@@ -31,8 +32,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(require("./components/home/home_routes"));
 app.use(require("./components/recipes/recipes_routes"));
 app.use(require("./components/messages/messages_routes"));
-// All not found routes use not_found_route
-app.use("*", require("./network/not_found_route"));
+// All not found routes use not_found_route middleware
+app.use(require("./network/not_found_route"));
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
