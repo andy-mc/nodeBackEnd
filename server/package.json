@@ -4,7 +4,7 @@
   "description": "Best back end ever :D !!",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon --trace-sync-io server.js",
+    "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

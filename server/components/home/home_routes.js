@@ -1,16 +1,16 @@
 "use strict";
 
 const express = require("express");
-const home_routes = express.Router(); // miniMain isolated route
+const home_routes = express.Router();
 const response = require("../../network/response");
-const sub_route = "";
+const sub_route = "/home";
 
-home_routes.use((req, res, next) => {
+const home_middleware = ((req, res, next) => {
   console.log("Home route middleware");
   next();
 });
 
-home_routes.get(sub_route, (req, res) => {
+home_routes.get(sub_route, home_middleware, (req, res) => {
   response.success(req, res, "GET Home", 200);
 });
 

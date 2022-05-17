@@ -3,7 +3,7 @@
 const express = require("express");
 const messages_routes = express.Router();
 const response = require("../../network/response");
-const sub_route = "";
+const sub_route = "/messages";
 
 messages_routes.all(sub_route, (req, res) => {
   const body = req.body;

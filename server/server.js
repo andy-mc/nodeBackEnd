@@ -28,9 +28,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Routes
-app.use("/home", require("./modules/home/home_routes"));
-app.use("/recipes", require("./modules/recipes/recipes_routes"));
-app.use("/messages", require("./modules/messages/messages_routes"));
+app.use(require("./components/home/home_routes"));
+app.use(require("./components/recipes/recipes_routes"));
+app.use(require("./components/messages/messages_routes"));
 // All not found routes use not_found_route
 app.use("*", require("./network/not_found_route"));
 
