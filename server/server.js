@@ -1,7 +1,7 @@
 "use strict";
 
 const express = require("express");
-const load_routes = require("./network/load_routes");
+const app_router = require("./network/app_router");
 const compression = require("compression");
 const path = require("path");
 
@@ -30,7 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Routes
-load_routes(app);
+app_router(app);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

@@ -1,6 +1,6 @@
 "use strict";
 
-function load_routes(app) {
+function app_router(app) {
   app.use(require("../components/home/home_routes"));
   app.use(require("../components/recipes/recipes_routes"));
   app.use(require("../components/messages/messages_routes"));
@@ -8,4 +8,4 @@ function load_routes(app) {
   app.use(require("./not_found_handler"));
 }
 
-module.exports = load_routes;
+module.exports = app_router;
