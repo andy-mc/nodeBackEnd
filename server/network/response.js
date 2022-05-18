@@ -28,3 +28,10 @@ module.exports = {
   error,
   html
 };
+
+// idea to format the response
+// {
+//   error || success: [true || false],
+//   "message": "User logged in successfully || Invalid email or password",
+//   "data": { ... },
+// }
