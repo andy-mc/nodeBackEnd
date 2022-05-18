@@ -16,7 +16,8 @@ console.log("[db]: La base de datos conectada exitosamente");
 const list = [];
 // fix eslint
 async function addMessage(message) {
-  const db_potential_message = new Model(message);
+  // const db_potential_message = await Model.create(message);
+  const db_potential_message = Model.insert(message);
   const save_message = await db_potential_message.save();
 
   return save_message;
