@@ -2,6 +2,7 @@
 
 const express = require("express");
 const home_routes = express.Router();
+const controller = require("./home_controller");
 const response = require("../../network/response");
 const sub_route = "/home";
 
@@ -18,6 +19,9 @@ home_routes.get(sub_route, (req, res) => {
 });
 
 home_routes.post(sub_route, (req, res) => {
+  const body = req.body;
+  controller.addMessage(body.user, body.message);
+  
   response.success(req, res, "POST Home", 200);
 });
 
