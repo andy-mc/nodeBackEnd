@@ -40,7 +40,30 @@ function listMessages() {
   });
 }
 
+function updateMessageById(message_id, message) {
+  return new Promise(async (resolve, reject) => {
+    if (!message_id || Object.keys(message).length === 0) { 
+      console.error("[updateMessage]: message id or message properties are undefined");
+      reject(new Error("Message not updated"));
+      return;
+    }
+
+    try {
+      const query = {_id: message_id};      
+      delete message.date;
+      const update = {$set: message};
+      
+      const new_message = await store.update(query, update);
+      resolve(new_message);
+    } catch (error) {
+      console.error("[Error updateMessage]:", error.stack);
+      reject(error);
+    }
+  });
+}
+
 module.exports = {
   addMessage,
-  listMessages
+  listMessages,
+  updateMessageById
 };
