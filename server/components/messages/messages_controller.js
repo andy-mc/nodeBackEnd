@@ -35,7 +35,7 @@ function listMessages() {
       resolve(messages);
     } catch (error) {
       console.error("[Error listMessages]:", error.stack);
-      reject(error)
+      reject(error);
     }
   });
 }
