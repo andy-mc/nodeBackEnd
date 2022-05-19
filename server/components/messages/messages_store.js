@@ -31,10 +31,23 @@ async function update(query, udpate) {
   return updated_document;
 }
 
+async function updateText(document_id, text) {
+  // tener metodos asi de personalizados esta bien
+  // o todos los metodos de un store deberian sopotar y servir 
+  // para N modelos
+  const updated_document = await Model.findOne({_id: document_id});
+  if (!updated_document) throw new Error(`Document Id: ${JSON.stringify(document_id)} not found`);
+  
+  updated_document.message = text;
+  const new_document = updated_document.save();
+  return new_document;
+}
+
 module.exports = {
   add,
   list,
   update,
+  updateText
   // get get an specific message
   // update an especific message
   // delete an especific message

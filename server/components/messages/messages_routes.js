@@ -38,4 +38,17 @@ messages_routes.put(route + "/:_id", async (req, res) => {
   }
 });
 
+messages_routes.patch(route + "/:_id", async (req, res) => {
+  const message_id = req.params._id;
+  const message = req.body.message;
+  try {
+    const updated_message = await controller.updateMessageText(message_id, message);
+    response.success(req, res, updated_message, 200);
+  } catch (error) {
+    // este response.error es genial porque tiene el efecto de generar un
+    // mensaje standard de error el mismo formato de error siempre
+    response.error(req, res, "text message not updated", 500, error.stack);
+  }
+});
+
 module.exports = messages_routes;

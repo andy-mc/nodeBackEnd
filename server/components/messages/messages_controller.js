@@ -53,6 +53,10 @@ function updateMessageById(message_id, message) {
       delete message.date;
       const update = {$set: message};
       
+      // it is possible a dev would want a store.updateText a granular
+      // update just for message store
+      // if so it would be a bad idea to have a global store
+      // why idukay has an abstract model is that a good idea ?
       const new_message = await store.update(query, update);
       resolve(new_message);
     } catch (error) {
@@ -62,8 +66,27 @@ function updateMessageById(message_id, message) {
   });
 }
 
+async function updateMessageText(message_id, message) {
+    if (!message_id || !message) { 
+      console.error("[updateMessageText]: message id or message text are undefined");
+      throw new Error("Message id or message text are undefined");
+    }
+
+    try {
+      // es buena idea tener un store por modulo
+      // o un solo global esta bien
+      // individules que puedan heredar del global
+      const new_message = await store.updateText(message_id, message);
+      return new_message;
+    } catch (error) {
+      console.error("[Error updateMessageText]:", error.stack);
+      throw error;
+    }
+}
+
 module.exports = {
   addMessage,
   listMessages,
-  updateMessageById
+  updateMessageById,
+  updateMessageText
 };
