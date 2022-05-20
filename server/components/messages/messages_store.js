@@ -44,6 +44,21 @@ async function updateText(document_id, text) {
   return new_document;
 }
 
+async function remove(document_id) {
+  const document_exists = await existDB(document_id);
+  if (!document_exists) throw new Error(
+    `Document id: ${document_id} not found, cannot delete a document that does not exist 🤣`
+  );
+
+  const removed_document = await Model.findOneAndRemove({_id: document_id});
+  return removed_document;
+}
+
+async function existDB(document_id) {
+  const exist = await Model.exists({_id: document_id});
+  return exist;
+}
+
 function getModelProps(filter_type) {
   return Model.schemaProps.filter((prop) => {
     if (filter_type) {
@@ -60,9 +75,6 @@ module.exports = {
   list,
   update,
   updateText,
+  remove,
   getModelProps
-  // get get an specific message
-  // update an especific message
-  // delete an especific message
 };
-

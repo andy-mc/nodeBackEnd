@@ -3,7 +3,7 @@
 const express = require("express");
 const recipes_routes = express.Router();
 const response = require("../../network/response");
-const sub_route = "/recipes";
+const sub_route = "/";
 
 recipes_routes.get(sub_route, (req, res) => {
   response.success(req, res, "GET Recipes", 200);

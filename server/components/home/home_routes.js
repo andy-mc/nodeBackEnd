@@ -4,7 +4,7 @@ const express = require("express");
 const home_routes = express.Router();
 const controller = require("./home_controller");
 const response = require("../../network/response");
-const sub_route = "/home";
+const sub_route = "/";
 
 const home_middleware = ((req, res, next) => {
   console.log("Home route middleware");
