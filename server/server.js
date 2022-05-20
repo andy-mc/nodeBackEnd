@@ -1,11 +1,14 @@
 "use strict";
 
 const express = require("express");
+const db = require("./db");
 const app_router = require("./network/app_router");
 const compression = require("compression");
 const path = require("path");
+require("dotenv").config({ path: ".env" });
 
-const PORT = process.env.PORT || 3000;
+console.log(process.env)
+
 const app = express();
 
 // optimization
@@ -32,19 +35,25 @@ app.use(express.urlencoded({ extended: false }));
 // Routes
 app_router(app);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+const PORT = process.env.PORT || 3000;
+const db_url = process.env.DB_URL;
+
+db.connectDataBase(db_url)
+.then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT} 🚀🚀 😎 !!`);
+  });
 });
 
 // Error handling
 process.on("uncaughtException", (errors) => {
-  console.error("uncaughtException");
+  console.error("[uncaughtException]");
   console.error(errors);
   process.exit(1);
 });
 
 process.on("unhandledRejection", (errors) => {
-  console.error("unhandledRejection");
+  console.error("[unhandledRejection]");
   console.error(errors);
   process.exit(1);
 });
