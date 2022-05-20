@@ -3,6 +3,7 @@
 const db = require("mongoose");
 // TODO: try to make this store a general store for all components modules
 const Model = require("./messages_model");
+Model.schemaProps = Object.keys(Model.schema.obj);
 
 // TODO: try to connect to mongodb on cloud
 // mover a server
@@ -20,8 +21,8 @@ async function add(document) {
   return new_document;
 }
 
-async function list() {
-  const all_documents = await Model.find();
+async function list(query) {
+  const all_documents = await Model.find(query);
   return all_documents;
 }
 
@@ -43,12 +44,25 @@ async function updateText(document_id, text) {
   return new_document;
 }
 
+function getModelProps(filter_type) {
+  return Model.schemaProps.filter((prop) => {
+    if (filter_type) {
+      const propType = Model.schema.paths[prop].instance.toLowerCase();
+      const is_filter_type = propType === filter_type.toLowerCase();
+      return is_filter_type ? prop : null;
+    }
+    return prop;
+  });
+}
+
 module.exports = {
   add,
   list,
   update,
-  updateText
+  updateText,
+  getModelProps
   // get get an specific message
   // update an especific message
   // delete an especific message
 };
+

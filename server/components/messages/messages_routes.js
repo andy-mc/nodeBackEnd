@@ -9,7 +9,7 @@ const route = "/messages";
 // fix eslint
 messages_routes.get(route, async (req, res) => {
   try {
-    const messages = await controller.listMessages();
+    const messages = await controller.listMessages(req.query);
     response.success(req, res, messages, 200);
   } catch (error) {
     response.error(req, res, "messages not retrieved", 500, error.stack);

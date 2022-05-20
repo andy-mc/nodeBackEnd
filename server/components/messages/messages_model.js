@@ -7,7 +7,7 @@ const messagesSchema = new Schema({
   user: { type: String, required: true },
   message: { type: String, required: true },
   date: { type: Date, default: Date.now }
-});
+}, {timestamps: true, versionKey: false});
 
 const messagesModel = mongoose.model("Messages", messagesSchema);
 
