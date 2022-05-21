@@ -10,7 +10,7 @@ async function add(document) {
 }
 
 async function list(query) {
-  const all_documents = await Model.find(query);
+  const all_documents = await Model.find(query).populate("user");
   return all_documents;
 }
 

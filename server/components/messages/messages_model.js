@@ -2,14 +2,15 @@
 
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const ObjectId = Schema.Types.ObjectId;
 
 const messagesSchema = new Schema({
-  user: { type: String, required: true },
+  user: {type: ObjectId, ref: "users"},
   message: { type: String, required: true },
-  date: { type: Date, default: Date.now }
+  date: { type: Date, default: Date.now } // Date.now returns z or tz 0 timezone
 }, {timestamps: true});
 
-const messagesModel = mongoose.model("Messages", messagesSchema);
+const messagesModel = mongoose.model("messages", messagesSchema);
 
 module.exports = messagesModel;
 
