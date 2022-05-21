@@ -3,10 +3,13 @@
 const store = require("./users_store");
 
 async function add_users(user) {
-  if (!Object.keys(user).length) {
-    throw new Error("[add_users]: user undefined 🙄");
+  if (!Object.keys(user).length || !user.name) {
+    throw new Error("[add_users]: user incomplete data 🙄");
   }
-  const new_user = await store.add(user);
+  const user_to_add = {
+    name: user.name
+  };
+  const new_user = await store.add(user_to_add);
   return new_user;
 }
 
