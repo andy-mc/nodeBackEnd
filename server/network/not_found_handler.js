@@ -9,7 +9,7 @@ const not_found_handler = (req, res) => {
   // maybe here I just have to response an error status 4XX
   // and when the client recieves the error it can handle it
   // and show the user a 404 screen
-  response.html(req, res, "<h3>404 page not found on Server :D !!</h3>");
+  response.html(req, res, "<h3>404 page not found on Server :D !!</h3>", 404);
 };
 
 module.exports = not_found_handler;
