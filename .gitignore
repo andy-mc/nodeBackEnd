@@ -3,3 +3,5 @@
 build
 node_modules
 server/.env
+server/env/.env.development
+server/env/.env.staging

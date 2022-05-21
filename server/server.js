@@ -1,14 +1,11 @@
 "use strict";
 
+const {PORT, DB_URL} = require("./env/config");
 const express = require("express");
 const db = require("./db");
 const app_router = require("./network/app_router");
 const compression = require("compression");
 const path = require("path");
-require("dotenv").config({ path: ".env" });
-
-console.log(process.env)
-
 const app = express();
 
 // optimization
@@ -35,10 +32,7 @@ app.use(express.urlencoded({ extended: false }));
 // Routes
 app_router(app);
 
-const PORT = process.env.PORT || 3000;
-const db_url = process.env.DB_URL;
-
-db.connectDataBase(db_url)
+db.connectDataBase(DB_URL)
 .then(() => {
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT} 🚀🚀 😎 !!`);
