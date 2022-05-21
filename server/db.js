@@ -9,7 +9,7 @@ const db_options = {
 
 async function connectDataBase(db_url) {
   await db.connect(db_url, db_options);
-  console.log("DataBase successfully connected 🐘🐘 !!");
+  console.log("DataBase successfully connected 🗄️ 🗄️");
 }
 
 module.exports = {
