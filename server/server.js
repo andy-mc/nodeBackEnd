@@ -42,13 +42,13 @@ db.connectDataBase(DB_URL)
 
 // Error handling
 process.on("uncaughtException", (errors) => {
-  console.error("[uncaughtException]");
+  console.error("[uncaughtException] 🤯 🤯");
   console.error(errors);
   process.exit(1);
 });
 
 process.on("unhandledRejection", (errors) => {
-  console.error("[unhandledRejection]");
+  console.error("[unhandledRejection] 🤨 🤨");
   console.error(errors);
   process.exit(1);
 });
