@@ -17,5 +17,3 @@ module.exports = {
   connectDataBase,
 };
 // TODO: try to connect to mongodb on cloud
-// try to create local an stagging environment
-// connect on server.js and with dinamic enviroments
