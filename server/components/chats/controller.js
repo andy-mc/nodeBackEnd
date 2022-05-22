@@ -12,8 +12,8 @@ async function addChat(chat) {
   return store.add(new_chat);
 }
 
-function listChats() {
-  return store.list();
+function listChats(query={}) {
+  return store.list(query);
 }
 
 module.exports = {

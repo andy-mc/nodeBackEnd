@@ -14,6 +14,18 @@ router.get(sub_route, async (req, res) => {
   }
 });
 
+router.get(sub_route + ":userId", async (req, res) => {
+  const query = {
+    users: req.params.userId,
+  };
+  try {
+    const chats = await controller.listChats(query);
+    response.success(req, res, chats, 200);
+  } catch (error) {
+    response.error(req, res, "Error at retriving Chat", 500, error);
+  }
+});
+
 router.post(sub_route, async (req, res) => {
   const chat = req.body;
   try {
