@@ -1,8 +1,17 @@
 "use strict";
 
 // TODO: try to make this store a general store for all components modules
+const {
+  get_search_query,
+  plugins : {
+    Only_Model_Props,
+    String_To_Regex
+  }
+} = require("../../store/utils");
+
 const Model = require("./messages_model");
-Model.schemaProps = Object.keys(Model.schema.obj);
+const only_model_props = Only_Model_Props(Model);
+const string_to_regex = String_To_Regex(Model);
 
 async function add(document) {
   const new_document = await Model.create(document);
@@ -10,6 +19,10 @@ async function add(document) {
 }
 
 async function list(query) {
+  const plugins = [only_model_props, string_to_regex];
+  const search_query = get_search_query(query, plugins);
+  if (!search_query) return [];
+  
   const all_documents = await Model.find(query).populate("user");
   return all_documents;
 }
@@ -47,22 +60,10 @@ async function existDB(document_id) {
   return exist;
 }
 
-function getModelProps(filter_type) {
-  return Model.schemaProps.filter((prop) => {
-    if (filter_type) {
-      const propType = Model.schema.paths[prop].instance.toLowerCase();
-      const is_filter_type = propType === filter_type.toLowerCase();
-      return is_filter_type ? prop : null;
-    }
-    return prop;
-  });
-}
-
 module.exports = {
   add,
   list,
   update,
   updateText,
-  remove,
-  getModelProps
+  remove
 };

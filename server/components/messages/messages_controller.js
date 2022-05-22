@@ -1,8 +1,6 @@
 "use strict";
 
 const store = require("./messages_store");
-const modelProps = store.getModelProps();
-const modelStringProps = store.getModelProps("string");
 
 async function addMessage(user, message) {  
   if (!user || !message) { 
@@ -20,9 +18,7 @@ async function addMessage(user, message) {
 }
 
 async function listMessages(query) {  
-  const search_query = getSearchQuery(query);
-  if (!search_query) return [];
-  const messages = await store.list(search_query);
+  const messages = await store.list(query);
   return messages;
 }
 
@@ -71,17 +67,3 @@ module.exports = {
   updateMessageText,
   removeMessage
 };
-
-function getSearchQuery(query) {
-  for (let [property, value] of Object.entries(query)) {
-    if (!modelProps.includes(property)) {
-      return false;
-    }
-
-    if (modelStringProps.includes(property)) {
-      if (typeof value === "string") value = [value];
-      query[property] = new RegExp(value.join("|"), "i");
-    }
-  }
-  return query;
-}
