@@ -5,7 +5,8 @@ const Schema = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 
 const messagesSchema = new Schema({
-  user: {type: ObjectId, ref: "users"},
+  chat: {type: ObjectId, ref: "chats", required: true},
+  user: {type: ObjectId, ref: "users", required: true},
   message: { type: String, required: true },
   date: { type: Date, default: Date.now } // Date.now returns z or tz 0 timezone
 }, {timestamps: true});

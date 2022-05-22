@@ -23,7 +23,10 @@ async function list(query) {
   const search_query = get_search_query(query, plugins);
   if (!search_query) return [];
   
-  const all_documents = await Model.find(query).populate("user");
+  const all_documents = await Model.find(query)
+  .populate("user")
+  .populate("chat");
+  
   return all_documents;
 }
 

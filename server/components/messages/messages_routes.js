@@ -18,7 +18,7 @@ messages_routes.get(sub_route, async (req, res) => {
 messages_routes.post(sub_route, async (req, res) => {
   const body = req.body;
   try {
-    const message = await controller.addMessage(body.user, body.message);
+    const message = await controller.addMessage(body.chat, body.user, body.message);
     response.success(req, res, message, 201);
   } catch (error) {
     response.error(req, res, "message not created", 400, error.stack);
