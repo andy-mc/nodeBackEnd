@@ -3,16 +3,16 @@
 const store = require("./store");
 
 async function addChat(chat) {
-  if (!Array.isArray(chat.users) || !chat.users.length) {
+  if (!valid_chat_users(chat.users)) {
     throw new Error("Chat must be an array and have at least one user");
   }
-  const new_chat = {
-    users: chat.users,
-  };
-  return store.add(new_chat);
+  return store.add(chat);
 }
 
 function listChats(query={}) {
+  if (!Object.keys(query).length === 0 && !query.users) {
+    throw new Error(`Chat query: ${query} incorrect`);
+  }
   return store.list(query);
 }
 
@@ -20,3 +20,7 @@ module.exports = {
   addChat,
   listChats,
 };
+
+function valid_chat_users(users) {
+  return Array.isArray(users) && users.length;
+}

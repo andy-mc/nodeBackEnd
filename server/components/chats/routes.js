@@ -27,8 +27,10 @@ router.get(sub_route + ":userId", async (req, res) => {
 });
 
 router.post(sub_route, async (req, res) => {
-  const chat = req.body;
   try {
+    const chat = {
+      users: req.body.users,
+    };
     const new_chat = await controller.addChat(chat);
     response.success(req, res, new_chat, 201);
   } catch (error) {
