@@ -26,7 +26,7 @@ messages_routes.post(sub_route, uploads.single("file"), async (req, res) => {
     chat: body.chat,
     user: body.user,
     message: body.message,
-    file_path: file.path,
+    file: file.filename
   };
 
   try {
