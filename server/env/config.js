@@ -4,11 +4,13 @@ const path = require("path");
 const environment = process.env.NODE_ENV || "development";
 const env_file = path.resolve(__dirname, `.${environment}.env`);
 require("dotenv").config({ path: env_file });
+const static_files_paths = require("./static_files_paths")(environment);
 
 const env_config = {
   NODE_ENV : process.env.NODE_ENV,
   PORT : process.env.PORT,
   DB_URL : process.env.DB_URL,
+  PUBLIC_UPLOADS : static_files_paths.public_uploads,
 };
 
 check_healthy_env_config(env_config);

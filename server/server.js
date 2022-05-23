@@ -1,6 +1,6 @@
 "use strict";
 
-const {PORT, DB_URL} = require("./env/config");
+const ENV = require("./env/config");
 const express = require("express");
 const db = require("./db");
 const app_router = require("./network/app_router");
@@ -24,6 +24,8 @@ app.use("/", express.static(
   path.join(__dirname, "../client/build"),
   options
 ));
+// Use express.static to serve the public uploads folder
+app.use("/uploads", express.static(ENV.PUBLIC_UPLOADS));
 
 // Parse request body
 app.use(express.json());
@@ -32,10 +34,10 @@ app.use(express.urlencoded({ extended: false }));
 // Routes
 app_router(app);
 
-db.connectDataBase(DB_URL)
+db.connectDataBase(ENV.DB_URL)
 .then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT} 🚀🚀`);
+  app.listen(ENV.PORT, () => {
+    console.log(`Server is running on port ${ENV.PORT} 🚀🚀`);
     console.log("Happy coding 😎 😎 !!");
   });
 });
