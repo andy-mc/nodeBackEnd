@@ -24,8 +24,8 @@ app.use("/", express.static(
   path.join(__dirname, "../client/build"),
   options
 ));
-// Use express.static to serve the public uploads folder
-app.use("/uploads", express.static(ENV.PUBLIC_UPLOADS));
+// Use express.static to serve the public files folder
+app.use("/files", express.static(ENV.PUBLIC_FILES));
 
 // Parse request body
 app.use(express.json());

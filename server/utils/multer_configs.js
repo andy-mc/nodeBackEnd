@@ -2,9 +2,9 @@
 
 const multer = require("multer");
 
-const public_uploads = multer.diskStorage({
+const public_files = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "public/uploads/");
+    cb(null, "public/files/");
   },
   filename: function (req, file, cb) {
       const [name, extension] = file.originalname.split(".");
@@ -13,5 +13,5 @@ const public_uploads = multer.diskStorage({
 });
 
 module.exports = {
-  public_uploads
+  public_files
 };

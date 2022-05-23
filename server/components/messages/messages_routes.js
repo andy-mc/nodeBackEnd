@@ -3,8 +3,8 @@
 const express = require("express");
 const messages_routes = express.Router();
 const multer = require("multer");
-const {public_uploads} = require("../../utils/multer_configs");
-const uploads = multer({storage: public_uploads});
+const multer_configs = require("../../utils/multer_configs");
+const public_files = multer({storage: multer_configs.public_files});
 const controller = require("./messages_controller");
 const response = require("../../network/response");
 const sub_route = "/";
@@ -18,7 +18,7 @@ messages_routes.get(sub_route, async (req, res) => {
   }
 });
 
-messages_routes.post(sub_route, uploads.single("file"), async (req, res) => {
+messages_routes.post(sub_route, public_files.single("file"), async (req, res) => {
   const body = req.body;
   const file = req.file || {};
   
