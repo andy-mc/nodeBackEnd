@@ -5,10 +5,10 @@ const path = require("path");
 function get_static_files_paths(environment) {
   const files_paths = {
     "development": {
-      public_files: path.join(__dirname, "../public/files")
+      public_dir: path.join(__dirname, "../public/")
     },
     "staging": {
-      public_files: "files/"
+      public_dir: "cloud_bucket/public_directory/"
     }
   };
 

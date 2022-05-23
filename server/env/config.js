@@ -10,7 +10,7 @@ const env_config = {
   NODE_ENV : process.env.NODE_ENV,
   PORT : process.env.PORT,
   DB_URL : process.env.DB_URL,
-  PUBLIC_FILES : static_files_paths.public_files,
+  PUBLIC_DIR : static_files_paths.public_dir,
 };
 
 check_healthy_env_config(env_config);
