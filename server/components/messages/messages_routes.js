@@ -2,6 +2,9 @@
 
 const express = require("express");
 const messages_routes = express.Router();
+const multer = require("multer");
+const {public_uploads} = require("../../utils/multer_configs");
+const uploads = multer({storage: public_uploads});
 const controller = require("./messages_controller");
 const response = require("../../network/response");
 const sub_route = "/";
@@ -15,10 +18,19 @@ messages_routes.get(sub_route, async (req, res) => {
   }
 });
 
-messages_routes.post(sub_route, async (req, res) => {
+messages_routes.post(sub_route, uploads.single("file"), async (req, res) => {
   const body = req.body;
+  const file = req.file || {};
+  
+  const new_message = {
+    chat: body.chat,
+    user: body.user,
+    message: body.message,
+    file_path: file.path,
+  };
+
   try {
-    const message = await controller.addMessage(body.chat, body.user, body.message);
+    const message = await controller.addMessage(new_message);
     response.success(req, res, message, 201);
   } catch (error) {
     response.error(req, res, "message not created", 400, error.stack);

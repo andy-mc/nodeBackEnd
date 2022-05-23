@@ -8,6 +8,7 @@ const messagesSchema = new Schema({
   chat: {type: ObjectId, ref: "chats", required: true},
   user: {type: ObjectId, ref: "users", required: true},
   message: { type: String, required: true },
+  file_path: { type: String},
   date: { type: Date, default: Date.now } // Date.now returns z or tz 0 timezone
 }, {timestamps: true});
 

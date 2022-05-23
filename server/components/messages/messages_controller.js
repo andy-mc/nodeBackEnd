@@ -2,19 +2,9 @@
 
 const store = require("./messages_store");
 
-async function addMessage(chat, user, message) {  
-  if (!chat || !user || !message) { 
-    throw new Error("[addMessage]: chat or user or message is undefined");
-  }
-
-  const _message = {
-    chat: chat,
-    user: user,
-    message: message,
-    date: new Date()
-  };
-
-  const new_message = await store.add(_message);
+async function addMessage(message) {  
+  message.date = Date.now();
+  const new_message = await store.add(message);
   return new_message;
 }
 
