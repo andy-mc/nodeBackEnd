@@ -45,18 +45,18 @@ export default {
   },
   methods: {
     sendMessage() {
-      console.log(this.$store.state.user)
+      console.log(this.$store.state.user);
       this.$store.dispatch('messages/sendMessage', {
         message: this.newMessage,
         chat: this.$route.params.id,
-        user: this.$store.state.user.selected
+        user: this.$store.state.user.selected,
         // user: {
         //   id: 'aaaaaaa',
         //   name: this.$store.state.user.selected.name
         // }
       });
       this.newMessage = '';
-    }
+    },
   },
   created() {
     this.$store.dispatch('messages/getMessages', this.$route.params.id);

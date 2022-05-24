@@ -32,6 +32,7 @@ const actions = {
   getUsers({ commit }) {
     axios.get(`${process.env.VUE_APP_API}/user`)
       .then((response) => {
+        console.log('response:', response)
         const UserList = response.data.body;
         console.log(UserList);
         commit('setUsers', UserList);

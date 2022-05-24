@@ -1,6 +1,6 @@
 <template>
   <div class="chat-list">
-    <h3>Usuarios</h3>
+    <h3>Usuarios 😁 </h3>
     <user-list-item
       v-for="user in $store.state.user.list"
       :key="user._id"

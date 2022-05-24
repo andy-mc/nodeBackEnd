@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <!-- <img alt="Vue logo" src="../assets/logo.png"> -->
-    <top-bar>Telegrom</top-bar>
+    <top-bar>Telegrom 😀</top-bar>
     <user-list />
     <!-- <new-chat /> -->
   </div>

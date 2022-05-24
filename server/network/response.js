@@ -1,10 +1,10 @@
 "use strict";
 
-const success = (req, res, data={}, status=200) => { 
+const success = (req, res, body={}, status=200) => { 
   res.status(status)
   .send({
     error: null,
-    data
+    body
   });
 };
 
