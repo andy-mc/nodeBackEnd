@@ -1,7 +1,9 @@
 "use strict";
 
 const express = require("express");
-const app = express();
+const app = express(); // request handler
+
+// server who listen pure server separated app
 const server = require("http").Server(app);
 const io = require("socket.io")(server);
 
