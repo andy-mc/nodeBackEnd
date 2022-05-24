@@ -25,10 +25,25 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>React App</title>
+    <script src="/socket.io/socket.io.js"></script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <script>
+      var socket = io.connect("http://localhost:3000", {
+        forceNew: true
+      });
+      socket.on('connect', function() {
+        console.log("CLIENT:", 'Conectado al servidor');
+      });
+      socket.on('disconnect', function() {
+        console.log("CLIENT:", 'Desconectado del servidor');
+      });
+      socket.on('messages', function(data) {
+        console.log('onMessages:', data);
+      });
+    </script>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

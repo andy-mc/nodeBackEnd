@@ -1,6 +1,7 @@
 "use strict";
 
 const express = require("express");
+const {socket} = require("../../socket");
 const messages_routes = express.Router();
 const multer = require("multer");
 const multer_configs = require("../../utils/multer_configs");
@@ -22,7 +23,7 @@ messages_routes.post(sub_route, public_files.single("file"), async (req, res) =>
   const body = req.body;
   const file = req.file || {};
   
-  const new_message = {
+  const _new_message = {
     chat: body.chat,
     user: body.user,
     message: body.message,
@@ -30,8 +31,9 @@ messages_routes.post(sub_route, public_files.single("file"), async (req, res) =>
   };
 
   try {
-    const message = await controller.addMessage(new_message);
-    response.success(req, res, message, 201);
+    const new_message = await controller.addMessage(_new_message);
+    socket.io.emit("messages", new_message);
+    response.success(req, res, new_message, 201);
   } catch (error) {
     response.error(req, res, "message not created", 400, error.stack);
   }

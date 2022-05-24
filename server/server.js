@@ -2,11 +2,14 @@
 
 const ENV = require("./env/config");
 const express = require("express");
+const app = express();
+const server = require("http").Server(app);
 const db = require("./db");
-const app_router = require("./network/app_router");
+
+const {connect_socket} = require("./socket");
+const load_app_routes = require("./network/load_app_routes");
 const compression = require("compression");
 const path = require("path");
-const app = express();
 
 // optimization
 app.use(compression());
@@ -31,12 +34,15 @@ app.use(express.static(ENV.PUBLIC_DIR));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Routes
-app_router(app);
-
 db.connectDataBase(ENV.DB_URL)
 .then(() => {
-  app.listen(ENV.PORT, () => {
+  return connect_socket(server);
+})
+.then(() => {
+  return load_app_routes(app);
+})
+.then(() => {
+  server.listen(ENV.PORT, () => {
     console.log(`Server is running on port ${ENV.PORT} 🚀🚀`);
     console.log("Happy coding 😎 😎 !!");
   });

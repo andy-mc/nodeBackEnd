@@ -1,0 +1,1 @@
+objecto socket exportable para uso en otro lugar, es importante que se un obj para que cualquier cambio que se de ya que es por referecia se cambie en todo lado

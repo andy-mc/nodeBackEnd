@@ -1,6 +1,6 @@
 "use strict";
 
-function app_router(app) {
+function load_app_routes(app) {
   app.use("/users", require("../components/users/users_routes"));
   app.use("/messages", require("../components/messages/messages_routes"));
   app.use("/chats", require("../components/chats/routes"));
@@ -8,4 +8,4 @@ function app_router(app) {
   app.use(require("./not_found_handler"));
 }
 
-module.exports = app_router;
+module.exports = load_app_routes;
