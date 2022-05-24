@@ -6,7 +6,7 @@ const app = express();
 const server = require("http").Server(app);
 const db = require("./db");
 
-const {connect_socket} = require("./socket");
+const socket = require("./socket");
 const load_app_routes = require("./network/load_app_routes");
 const compression = require("compression");
 const path = require("path");
@@ -36,7 +36,7 @@ app.use(express.urlencoded({ extended: false }));
 
 db.connectDataBase(ENV.DB_URL)
 .then(() => {
-  return connect_socket(server);
+  return socket.connect(server);
 })
 .then(() => {
   return load_app_routes(app);
