@@ -9,8 +9,10 @@ const db = require("./db");
 const socket = require("./socket");
 const load_app_routes = require("./network/load_app_routes");
 const compression = require("compression");
+const cors = require("cors");
 const path = require("path");
 
+app.use(cors());
 // optimization
 app.use(compression());
 
