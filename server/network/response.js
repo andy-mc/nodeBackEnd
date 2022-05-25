@@ -1,19 +1,27 @@
 "use strict";
 
-const success = (req, res, body={}, status=200) => { 
+const statusMessages = {
+  "200": "OK",
+  "201": "Created",
+  "400": "Bad Request",
+  "404": "Not Found",
+  "500": "Internal Server Error"
+};
+
+const success = (req, res, body, status=200) => { 
   res.status(status)
   .send({
     error: null,
-    body
+    body: body || statusMessages[status]
   });
 };
 
-const error = (req, res, error={}, status=404, error_details) => { 
+const error = (req, res, error, status=500, error_details) => { 
   console.error("[LOG_ERROR_DETAILS]:", error_details);
 
   res.status(status)
   .send({
-    error,
+    error: error || statusMessages[status],
     data: null
   });
 };
