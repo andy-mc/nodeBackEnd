@@ -11,6 +11,7 @@ const env_config = {
   PORT : process.env.PORT,
   DB_URL : process.env.DB_URL,
   PUBLIC_DIR : static_files_paths.public_dir,
+  FILES_ROUTE : static_files_paths.files_route,
 };
 
 check_healthy_env_config(env_config);
