@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-function getUserId(state, id) {
+function getUserId(state, id)  {
   let ret = null;
 
   if (state.list) {
@@ -22,7 +22,9 @@ const initialState = {
 
 // Getters
 const getters = {
-  getUserId: state => id => getUserId(state, id),
+  getUserId: state => (id) => {
+    return getUserId(state, id);
+  },
 };
 
 // Actions
@@ -38,10 +40,10 @@ const actions = {
         console.error('Unable to get User list', err);
       });
   },
-  selectUser({ commit }, data) {
+  selectUser({commit}, data) {
     // axios.post(...);
     commit('selectUser', data);
-  },
+  }
 };
 
 // Mutations
@@ -55,7 +57,7 @@ const mutations = {
     state.selected = data;
   },
   addMessage(state, data) {
-    const index = getUserId(state, data.User);
+    let index = getUserId(state, data.User);
     state.list[index].messages.push(data.message);
     state.list[index].message = data.message;
   },
