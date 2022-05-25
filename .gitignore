@@ -9,3 +9,4 @@ server/env/.development.env
 server/env/.staging.env
 server/uploads
 server/public
+client_react/node_modules
